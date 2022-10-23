@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>list file</title>
+    <link rel="icon" type="image/x-icon" href="Images/workshop-icon.ico">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <style>
+
+        top {
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        hp {
+            text-align: center;
+        }
+
+        button {
+            position: absolute;
+            right: 0;
+            margin-top: 10px;
+            margin-right: 200px;
+        }
+
+        .username {
+            position: absolute;
+            right: 0;
+            margin-top: 17px;
+            margin-right: 295px;
+        }
+
+        .github-icon {
+            position: absolute;
+            right: 0;
+            margin-right: 204px;
+        }
+
+        .github-text {
+            position: absolute;
+            right: 0;
+            margin-top: 8px;
+            margin-right: 260px;
+        }
+    </style>
+
+</head>
+
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">Student System</a>
+
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/list/file}">download file</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/manage/user}">Management</a>
+            </li>
+            <!--            <li class="nav-item">-->
+            <!--                <a class="nav-link" th:href="@{/manage/file}">file management</a>-->
+            <!--            </li>-->
+            <!--            <li class="nav-item">-->
+            <!--                <a class="nav-link" th:href="@{/new/file}">new file</a>-->
+            <!--            </li>-->
+            <li class="nav-item">
+                <a href="https://www.github.com" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
+                         width="45" class="nav-link github-icon">
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<br>
+
+<div class="container">
+    <div class="top">
+        <!--    if auth is true     -->
+        <div sec:authorize="isAuthenticated()">
+            <form th:action="@{/logout}" th:object="${username}">
+                <p class="username" th:text="${username}">test name</p>
+                <button class="btn btn-primary" type="submit">Log out</button>
+            </form>
+            <h1>File to Download</h1>
+        </div>
+    </div>
+
+    <br>
+
+    <table class="table">
+        <tr>
+            <th>name</th>
+            <th>Download link</th>
+            <th>soft98 download link</th>
+        </tr>
+        <tr th:each="item : ${fileList}">
+            <td><a th:text="${item.fileName}" th:width="35px"></a></td>
+            <td>
+                <a th:href="@{/file/{fileId}(fileId=${item.id})}" target="_blank">Download</a>
+            </td>
+            <td>
+                <a th:href="@{(${item.onlineAddress})}" target="_blank">forward to soft98</a>
+            </td>
+        </tr>
+    </table>
+
+    <hr>
+    <p> Developed by &copy;
+        <a href="https://github.com/mohkhz2001" target="_blank">Mohammadmehdi khajehzadeh </a>
+    </p>
+    <!--    <p> Support email &copy; <a href="mail:eng.khajehzadeh@gmail.com">eng.khajehzadeh@gmail.com</a></p>-->
+
+</div>
+</body>
+
+
+</html>

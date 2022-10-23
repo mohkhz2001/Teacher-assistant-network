@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>+ new file +</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+</head>
+<body>
+
+<br>
+<br>
+<!-- Create HTML registration form -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+
+            <!-- success message -->
+            <div th:if="${param.success}">
+                <div class="alert alert-info">You've successfully registered
+                    to our awesome app!
+                </div>
+            </div>
+
+            <h1>New File</h1>
+
+            <form th:action="@{/new/file}" method="post" th:object="${file}">
+                <div class="form-group">
+                    <label class="control-label" for="fileName"> File Name </label>
+                    <input id="fileName" class="form-control" th:field="*{fileName}"
+                           required autofocus="autofocus"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="localAddress"> file path </label> <input
+                        id="localAddress" class="form-control" th:field="*{localAddress}"
+                        required autofocus="autofocus"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="onlineAddress"> soft98 Link </label> <input
+                        id="onlineAddress" class="form-control" th:field="*{onlineAddress}"
+                        required autofocus="autofocus"/>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">Add</button>
+                    <span>want to watch the list? <a href="/" th:href="@{/login}">Login
+                								here</a></span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
